@@ -16,7 +16,7 @@ public class UsuarioService {
     }
 
     public Usuario crearUsuario(Usuario u) {
-        u.setSaldo(1000); // saldo inicial casino
+        u.setSaldo(1000.0); // saldo inicial casino
         return repo.save(u);
     }
 

@@ -12,11 +12,11 @@ public class Usuario {
 
     private String username;
     private String password;
-    private double saldo = 1000;
+    private Double saldo = 1000.0;
 
     public Usuario() {}
 
-    public Usuario(String username, String password, double saldo) {
+    public Usuario(String username, String password, Double saldo) {
         this.username = username;
         this.password = password;
         this.saldo = saldo;
@@ -31,5 +31,5 @@ public class Usuario {
     public void setPassword(String password) { this.password = password; }
 
     public double getSaldo() { return saldo; }
-    public void setSaldo(double saldo) { this.saldo = saldo; }
+    public void setSaldo(Double saldo) { this.saldo = saldo; }
 }
