@@ -12,7 +12,7 @@ public class Usuario {
 
     private String username;
     private String password;
-    private double saldo;
+    private double saldo = 1000;
 
     public Usuario() {}
 
