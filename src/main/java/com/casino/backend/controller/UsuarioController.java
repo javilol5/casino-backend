@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/usuarios")
+@RequestMapping("/api/auth")
 public class UsuarioController {
 
     private final UsuarioService service;
@@ -15,14 +15,15 @@ public class UsuarioController {
     public UsuarioController(UsuarioService service) {
         this.service = service;
     }
-
-    @PostMapping
-    public Usuario crear(@RequestBody Usuario u) {
-        return service.crearUsuario(u);
+    // REGISTRO
+    @PostMapping("/register")
+    public Usuario register(@RequestBody Usuario u) {
+        return service.register(u);
     }
 
-    @GetMapping
-    public List<Usuario> listar() {
-        return service.listar();
+    // LOGIN
+    @PostMapping("/login")
+    public Usuario login(@RequestBody Usuario u) {
+        return service.login(u.getUsername(), u.getPassword());
     }
 }

@@ -4,7 +4,7 @@ import com.casino.backend.model.Usuario;
 import com.casino.backend.repository.UsuarioRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UsuarioService {
@@ -15,12 +15,29 @@ public class UsuarioService {
         this.repo = repo;
     }
 
-    public Usuario crearUsuario(Usuario u) {
-        u.setSaldo(1000.0); // saldo inicial casino
+    // REGISTRO
+    public Usuario register(Usuario u) {
+
+        Optional<Usuario> existing = repo.findByUsername(u.getUsername());
+
+        if (existing.isPresent()) {
+            throw new RuntimeException("El usuario ya existe");
+        }
+
+        u.setSaldo(1000.0);
         return repo.save(u);
     }
 
-    public List<Usuario> listar() {
-        return repo.findAll();
+    // LOGIN
+    public Usuario login(String username, String password) {
+
+        Usuario user = repo.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+        if (!user.getPassword().equals(password)) {
+            throw new RuntimeException("Contraseña incorrecta");
+        }
+
+        return user;
     }
 }
